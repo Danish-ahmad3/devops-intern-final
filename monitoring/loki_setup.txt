@@ -1,0 +1,12 @@
+======================================================================
+Grafana Loki Monitoring Setup Documentation
+======================================================================
+1. Starting Loki via Docker:
+docker run -d --name=loki -p 3100:3100 grafana/loki:2.9.0
+
+2. Log Forwarding Configuration:
+docker run --log-driver=loki --log-opt loki-url="http://localhost:3100/loki/api/v1/push" your-container-image
+
+3. Querying / Viewing Logs:
+curl -G "http://localhost:3100/loki/api/v1/query_range" --data-urlencode 'query={job="fluent-bit"}'
+
